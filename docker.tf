@@ -8,7 +8,6 @@ resource "aws_instance" "name" {
   root_block_device {
     volume_size = 50 #set root volume size to 50GB
     volume_type = "gp3" # use gp3 for better performance(optional)
-    delete_on_termination = true
   }
   user_data = file("docker.sh")
   tags = {
@@ -21,10 +20,10 @@ resource "aws_security_group" "allow_all_docker" {
   name        = "allow_all_docker"
   description = "Allow TLS inbound traffic and all outbound traffic"
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+ ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
 
   }
@@ -35,13 +34,7 @@ resource "aws_security_group" "allow_all_docker" {
     cidr_blocks = ["0.0.0.0/0"]
 
   }
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-
-  }
+ 
   egress {
     from_port   = 0
     to_port     = 0

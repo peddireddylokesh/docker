@@ -5,15 +5,8 @@ metadata:
   name: expense
   region: us-east-1
 
-nodeGroups:
-  - name: expense-spot
+managedNodeGroups:
+  - name: expense
+    instanceTypes: ["m5.large", "c3.large","c4.large","c5.large"]
     desiredCapacity: 3
-    minSize: 1
-    maxSize: 5
-    instancesDistribution:
-      instanceTypes: ["m5.large", "c3.large", "c4.large", "c5.large"]
-      onDemandBaseCapacity: 0
-      onDemandPercentageAboveBaseCapacity: 0
-      spotInstancePools: 4
-
-
+    spot: true
