@@ -5,8 +5,8 @@ PLATFORM=$(uname -s)_$ARCH
 sudo growpart /dev/nvme0n1 4
 lvextend -l +50%FREE /dev/RootVG/rootVol
 lvextend -l +50%FREE /dev/RootVG/varVol
-xfs_growfs /
-xfs_growfs /var
+sudo xfs_growfs /
+sudo xfs_growfs /var
 
 dnf -y install dnf-plugins-core
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
